@@ -17,6 +17,89 @@
 
 <body>
 
+  <script type="text/javascript"> 
+           function validate(){
+               if (document.getElementById("uname").value == ""){
+                   alert("Please enter your FULL NAME"); return false; 
+               }
+               if (document.getElementById("uphone").value == ""){
+                   alert("Please enter your PHONE NUMBER"); return false; 
+               }
+               if (document.getElementById("ugen").value == ""){
+                   alert("Please select your GENDER"); return false; 
+               }
+               if (document.getElementById("uinst").value == ""){
+                   alert("Enter select your INSTITUTE"); return false; 
+               }
+              else {  
+                       document.getElementById("check").click();
+                     //  document.getElementById("reset_timer").click();
+ } 
+           }
+        </script>
+
+<form class="container" id="app">
+  
+      <input type="text" class="form-control" placeholder="Username" id="uname" v-model="username" required="required" />
+
+      <input type="email" placeholder="Email" v-model="email" id="uphone" required="required" />
+  
+      <input type="text" placeholder="Twitter" v-model="twitter" id="ugen" required="required"  />
+  
+  <input type="text" placeholder="Codepen" v-model="codepen" id="uinst" required />
+
+<span onclick="validate()">check details</span>
+
+    <button type="button" class="btn btn-primary" @click="Save()" id="check"><i class="fas fa-check"></i>&nbsp;&nbsp; Save Details</button>
+    <button type="button" class="btn btn-default" @click="Clear()"><i class="fas fa-trash-alt"></i>&nbsp;&nbsp; Clear</button>
+  </div>
+  
+</form>
+<!-- partial -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js'></script>
+
+  <script>
+  new Vue({
+  el: '#app',
+  data: {
+    username: '',
+    email: '',
+    twitter: '',
+    codepen: ''
+  },
+
+  mounted () {
+
+    this.username = Cookies.get('username')
+    this.email = Cookies.get('email')
+    this.twitter = Cookies.get('twitter')
+    this.codepen = Cookies.get('codepen')
+
+  },
+  methods: {
+
+    Save () {
+      Cookies.set('username', this.username, { expires: 400 })
+      Cookies.set('email', this.email, { expires: 400 })
+      Cookies.set('twitter', this.twitter, { expires: 400 })
+      Cookies.set('codepen', this.codepen, { expires: 400 })
+    },
+
+    Clear () {
+      Cookies.remove('username')
+      Cookies.remove('email')
+      Cookies.remove('twitter')
+      Cookies.remove('codepen')
+      this.username = ''
+      this.email = ''
+      this.twitter = ''
+      this.codepen = ''
+    }
+
+  }
+})
+  </script>
 
 
 
