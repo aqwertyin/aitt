@@ -1,0 +1,40 @@
+<form class="container" id="session_dtg">
+  
+      <input type="text" placeholder="MIS CODE" id="mis_code" v-model="mis_code" required="required" />
+  <br/>
+ 
+    <input type="submit" class="btn btn-primary" @click="Save()" id="check" value="GO" />
+  <!--  <button type="button" class="btn btn-default" @click="Clear()"><i class="fas fa-trash-alt"></i>&nbsp;&nbsp; Clear</button> -->
+  </div>
+  
+</form>
+<!-- partial -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js'></script>
+
+  <script>
+  new Vue({
+  el: '#session_dtg',
+  data: { mis_code: '' },
+  mounted () {   this.mis_code = Cookies.get('mis_code')  },
+  methods: { Save () {   Cookies.set('mis_code', this.mis_code, { expires: 400 })    },
+Clear () { Cookies.remove('mis_code')      
+this.mis_code = ''    }
+
+  }
+})
+  </script>
+
+
+<p id="checksum"></p>
+<button onclick="session_handler()">Create Session</button>
+
+<script>
+
+function session_handler() {
+var session = document.getElementById("mis_code").value;
+document.getElementById("checksum").innerHTML = session;
+}
+
+
+</script>
